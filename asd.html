@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../bower_components/angular/angular.min.js"></script>
+    <script src="../../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
+</head>
+<body ng-app="app" ng-controller="parentCtr">
+<div >
+    <div ng-controller="childCtr1">name :
+        <input ng-model="name" type="text" ng-change="change(name);" />
+    </div>
+    <div ng-controller="childCtr2">Ctr1 name:
+        <input ng-model="ctr1Name" />
+    </div>
+</div>
+<script>
+    angular.module("app", []).controller("parentCtr",
+
+            function ($scope) {
+                $scope.$on("Ctr1NameChange",
+
+                        function (event, msg) {
+                            console.log("parent", msg);
+                            $scope.$broadcast("Ctr1NameChangeFromParrent", msg);
+                        });
+            }).controller("childCtr1", function ($scope) {
+        $scope.change = function (name) {
+            console.log("childCtr1", name);
+            $scope.$emit("Ctr1NameChange", name);
+        };
+    }).controller("childCtr2", function ($scope) {
+        $scope.$on("Ctr1NameChangeFromParrent",
+
+                function (event, msg) {
+                    console.log("childCtr2", msg);
+                    $scope.ctr1Name = msg;
+                });
+    });
+</script>
+</body>
+</html>

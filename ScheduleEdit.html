@@ -1,0 +1,14 @@
+<div  class="mainschedule" >
+    <h1>请&nbsp添&nbsp加&nbsp日&nbsp程</h1>
+    <div class="scheduleheader">
+        <label for="schedulehead" style="font: 18px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;">日程安排:&nbsp</label>
+        <input type="text" id="schedulehead"  placeholder="请添加日程标题"
+               ng-model="message.text" />
+    </div>
+    <div class="content">
+        <span>详细日程:&nbsp&nbsp</span>
+        <textarea name="content" cols="30" rows="10" placeholder="请添加日程内容" ng-model="message.description"></textarea>
+    </div>
+    <button class="button submit" ng-click="submit()">提交</button>
+    <button class="button cancel" ng-click="cancel()">取消</button>
+</div>
